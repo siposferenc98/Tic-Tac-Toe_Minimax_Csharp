@@ -142,8 +142,33 @@ namespace Tic_Tac_Toe_Minimax
             }
         }
 
+        static char vege()
+        {
+            while (true)
+            {
+                char inp = ' ';
+                Console.WriteLine("Szeretnél új játékot játszani?(i/n): ");
+                try
+                {
+                    inp = Convert.ToChar(Console.ReadLine());
+                    if (inp != 'i' || inp != 'n')
+                    {
+                        throw new Exception();
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Nem megfelelő karakter! ");
+                }
+                if(inp == 'i' || inp == 'n')
+                {
+                    return inp;
+                }
+            }
+        }
 
-        static void Main(string[] args)
+
+        static void Main()
         {
             char[,] tabla =
             {
@@ -164,17 +189,24 @@ namespace Tic_Tac_Toe_Minimax
             if (Lepes.nyerolehetosegek(Tabla.tablazat) == 1)
             {
                 Console.WriteLine(Minimax.jatekos + " nyert!");
-                Console.ReadLine();
             }
             else if (Lepes.nyerolehetosegek(Tabla.tablazat) == -1)
             {
                 Console.WriteLine(Minimax.ellenfel + " nyert!");
-                Console.ReadLine();
             }
             else
             {
                 Console.WriteLine("Döntetlen!");
-                Console.ReadLine();
+            }
+            switch(vege())
+            {
+                case 'i':
+                    Console.Clear();
+                    Main();
+                    break;
+                case 'n':
+                    Environment.Exit(0);
+                    break;
             }
 
 
